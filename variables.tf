@@ -1,7 +1,2 @@
-variable "cluster_name" {
-  type = string
-}
-variable "token_key" {
-  type = string
-}
-
+variable "cluster_name" {}
+variable "token_key" {}
