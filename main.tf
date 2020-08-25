@@ -4,7 +4,7 @@ data "rancher2_cluster" "cluster" {
 }
 resource "rancher2_project" "jfrog" {
     cluster_id = "${data.rancher2_cluster.cluster.id}"
-    name = "JFrog"
+    name = "${var.prj_name}"
 }
 resource "rancher2_namespace" "jfog" {
     name = "artifactory-ha"
