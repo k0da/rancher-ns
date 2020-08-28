@@ -11,3 +11,15 @@ resource "rancher2_namespace" "namespace" {
     name = each.value
     project_id = "${rancher2_project.project.id}"
 }
+
+resource "rancher2_project_logging" "logging" {
+    name = "elasticsearch"
+    project_id = "${rancher2_project.project.id}"
+    kind = "custom"
+    custom_target_config {
+      content = templatefile("./logging.tmpl", 
+                              { endpoint = "${var.elastic_endpoint}", 
+                                pass = "${var.elastic_password}"
+                              })
+    }
+}
