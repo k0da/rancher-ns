@@ -1,0 +1,26 @@
+name: Terraform validate
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "**"
+      - ".github/workflows/terraform.yaml"
+env:
+  TF_VAR_cluster_name: "foo"
+  TF_VAR_token: "token"
+  TF_VAR_rancher_url: "https://example.com"
+  TF_VAR_prj_name: "awesome prj"
+  TF_VAR_namespaces: '["ns1", "ns2"]'
+jobs:
+  validate:
+    name: "Run terraform validate"
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: terraform
+        uses: hashicorp/setup-terraform@v1
+      - name: terraform validate
+        run: terraform validate
