@@ -22,7 +22,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: terraform
-        uses: hashicorp/setup-terraform@v1
-      - name: terraform validate
-        run: terraform validate
+      - name: Terraform Init
+        id: init
+        run: terraform init
+      - name: Terraform Validate
+        id: validate
+        run: echo -n "::set-output name=stdout::$(terraform validate -no-color)"
+
